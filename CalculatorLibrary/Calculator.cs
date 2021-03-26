@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculatorLibrary
+{
+    public class Calculator
+    {
+        public static double Calculate(string input)
+        {
+            return 0;
+        }
+    }
+}
