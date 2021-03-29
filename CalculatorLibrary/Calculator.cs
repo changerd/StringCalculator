@@ -10,22 +10,65 @@ namespace CalculatorLibrary
     {
         public static double Calculate(string input)
         {
-            return 0;
+            char[] exp = input.ToCharArray();
+            Stack<double> vStack = new Stack<double>();
+            Stack<char> opStack = new Stack<char>();
+
+            opStack.Push('(');
+
+            int pos = 0;
+            while(pos <= exp.Length)
+            {
+                if(pos == exp.Length || exp[pos] == ')')
+                {
+                    ClosingParanthesis(vStack, opStack);
+                    pos++;
+                }
+                else if (exp[pos] >= '0' && exp[pos] <= '9')
+                {
+                    pos = InputNumber(exp, pos, vStack);
+                }
+                else
+                {
+                    InputOpertor(exp[pos], vStack, opStack);
+                    pos++;
+                }
+            }
+
+            return vStack.Pop();
         }
 
         static void ClosingParanthesis(Stack<double> vStack, Stack<char> opStack)
         {
+            while (opStack.Peek() != '(')
+            {
+                ExecuteOperation(vStack, opStack);
+            }
 
+            opStack.Pop();
         }
 
-        static double InputNumebr(char[] exp, int pos, Stack<double> vStack)
+        static int InputNumber(char[] exp, int pos, Stack<double> vStack)
         {
+            double value = 0;
+            while(pos < exp.Length && exp[pos] >= '0' && exp[pos] <= '9')
+            {
+                value = 10 * value + (double)(exp[pos++] - '0');
+            }
+
+            vStack.Push(value);
+
             return pos;
         }
 
         static void InputOpertor(char op, Stack<double> vStack, Stack<char> opStack)
         {
+            while (opStack.Count > 0 && OperatorCausesEvalation(op, opStack.Peek()))
+            {
+                ExecuteOperation(vStack, opStack);
+            }
 
+            opStack.Push(op);
         }
 
         static bool OperatorCausesEvalation(char op, char prevOp)
