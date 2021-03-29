@@ -96,8 +96,22 @@ namespace CalculatorLibrary
         static void ExecuteOperation(Stack<double> vStack, Stack<char> opStack)
         {
             double rightOperand = vStack.Pop();
-            double leftOperand = vStack.Pop();
             char op = opStack.Pop();
+            //double leftOperand = vStack.Pop();
+            double leftOperand = 0;
+            if (vStack.Count > 0)
+            {
+                leftOperand = vStack.Pop();
+            }
+            else if (vStack.Count == 0 && op == '-')
+            {
+                leftOperand = -1;
+                op = '*';
+            }
+            /*else
+            {
+                throw new Exception("Error calculate operation");
+            }*/
 
             double result = 0;
 
