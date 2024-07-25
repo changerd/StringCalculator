@@ -8,4 +8,7 @@ StringCalculator is a simple console-based application that evaluates arithmetic
 - **Parentheses Handling**: Handles parentheses (`(` and `)`) to specify operation precedence.
 - **Input**: Accepts arithmetic expressions from the user via console input.
 - **Output**: Displays the result of the evaluated expression in the console.
- 
+
+## Notes 
+- **Error Handling**: The application assumes well-formed input expressions. Ensure parentheses are balanced and operators are correctly placed.
+- **Additional Operators**: Currently supports +, -, *, and /. Extending to support more operators would require modifications to the Calculator class.
